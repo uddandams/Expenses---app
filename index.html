@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Expenses</title>
+
+<style>
+body{
+font-family: Arial;
+background:#f2f2f2;
+padding:20px;
+}
+
+h2{
+text-align:center;
+}
+
+input, select, button{
+width:100%;
+padding:10px;
+margin:5px 0;
+font-size:16px;
+}
+
+button{
+background:green;
+color:white;
+border:none;
+}
+
+table{
+width:100%;
+background:white;
+margin-top:15px;
+border-collapse:collapse;
+}
+
+th, td{
+padding:8px;
+border:1px solid #ddd;
+text-align:center;
+}
+
+.total{
+font-size:20px;
+margin-top:10px;
+text-align:center;
+font-weight:bold;
+}
+</style>
+
+</head>
+<body>
+
+<h2>Expense Tracker</h2>
+
+<input type="date" id="date">
+
+<input type="text" id="desc" placeholder="Description">
+
+<input type="number" id="amount" placeholder="Amount">
+
+<select id="category">
+<option>Food</option>
+<option>Travel</option>
+<option>Bills</option>
+<option>Shopping</option>
+<option>Others</option>
+</select>
+
+<button onclick="addExpense()">Add Expense</button>
+
+<div class="total">Total: ₹ <span id="total">0</span></div>
+
+<table>
+<thead>
+<tr>
+<th>Date</th>
+<th>Description</th>
+<th>Amount</th>
+<th>Category</th>
+</tr>
+</thead>
+<tbody id="list"></tbody>
+</table>
+
+<script>
+let total = 0;
+
+function addExpense(){
+
+let date = document.getElementById("date").value;
+let desc = document.getElementById("desc").value;
+let amount = parseFloat(document.getElementById("amount").value) || 0;
+let category = document.getElementById("category").value;
+
+if(desc=="" || amount==0){
+alert("Enter details");
+return;
+}
+
+total += amount;
+document.getElementById("total").innerText = total;
+
+let row = `
+<tr>
+<td>${date}</td>
+<td>${desc}</td>
+<td>${amount}</td>
+<td>${category}</td>
+</tr>
+`;
+
+document.getElementById("list").innerHTML += row;
+
+document.getElementById("desc").value="";
+document.getElementById("amount").value="";
+}
+</script>
+
+</body>
+</html>
